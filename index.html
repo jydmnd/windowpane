@@ -180,12 +180,12 @@ button{background:#132235;color:white;border:none;padding:8px 14px;border-radius
   }
 
   function isNearForbiddenPattern(seq){
-    if(seq.length !== 7) return false;
+    if(seq.length < 6) return false;
     return forbiddenSets.some(fs => seq.every(seg => fs.has(seg)));
   }
 
 const mytap = ( window.ontouchstart === null ) ? 'touchstart' : 'click';
-
+musicAlert.currentTime = 0;
   segments.forEach(s=>{
     s.addEventListener(mytap,()=>{
       const id = +s.dataset.id;
@@ -198,9 +198,9 @@ const mytap = ( window.ontouchstart === null ) ? 'touchstart' : 'click';
       if(isNearForbiddenPattern(tempSeq)){
         document.body.style.background='#550000';
         musicHappy.pause();
-        musicAlert.currentTime = 0;
+      
         musicAlert.play();
-        setTimeout(()=>{document.body.style.background='#09121e'; musicHappy.play(); musicAlert.pause();},3000);
+        setTimeout(()=>{document.body.style.background='#09121e'; musicHappy.play(); musicAlert.pause();},10000);
       }
       else  {
         maybeStopMusic = true;
